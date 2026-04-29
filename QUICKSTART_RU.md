@@ -124,4 +124,4 @@ PAS/
 
 ## Лицензия
 
-MIT License — используйте свободно!
+MIT License
