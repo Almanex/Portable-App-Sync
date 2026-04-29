@@ -1,84 +1,86 @@
-# Быстрый старт — PAS (Portable App Sync)
+# Quick Start — PAS (Portable App Sync)
 
-## Для пользователей
+🇷🇺 **[Russian version / Русская версия](QUICKSTART_RU.md)**
 
-### Где найти готовое приложение?
+## For Users
 
-Portable executable находится здесь:
+### Where to find the ready-to-use application?
+
+The portable executable is located here:
 ```
 bin\Release\net10.0-windows\win-x64\publish\PAS.exe
 ```
 
-Просто скопируйте этот файл куда угодно и запустите — установка не требуется!
+Just copy this file anywhere and run it — no installation required!
 
-### Как использовать?
+### How to use?
 
-1. **Запустите** `PAS.exe`
-2. **Дождитесь** автоматического сканирования (индексируются только пользовательские desktop-приложения)
-3. **Выберите** приложения, которые хотите сохранить (галочками)
-   - Используйте фильтр вида, чтобы быстро показать только offline-ready приложения, online fallback или исключенные по умолчанию элементы
-4. **Выберите режим**:
-   - 📄 **Онлайн-скрипт** — если на новой системе будет интернет (рекомендуется)
-   - 💾 **Оффлайн-пакет** — если нужен гибридный набор: локальные установщики + fallback-скрипт для приложений, которые нельзя скачать оффлайн
-5. **Нажмите** кнопку экспорта
+1. **Run** `PAS.exe`
+2. **Wait** for automatic scanning (only user desktop applications are indexed)
+3. **Select** the applications you want to save (checkboxes)
+   - Use the view filter to quickly show only offline-ready apps, online fallback, or excluded items
+4. **Select mode**:
+   - 📄 **Online Script** — if the new system will have internet (recommended)
+   - 💾 **Offline Package** — if you need a hybrid set: local installers + fallback script for apps that cannot be downloaded offline
+5. **Click** the export button
 
-> **💡 Совет**: Скрытые приложения (Microsoft Store, драйверы, системные библиотеки) по умолчанию вырезаются из списка. Вы можете включить их отображение в любой момент, поставив галочку **"Показывать системные и скрытые приложения"**. Также вы можете навести курсор мыши на любую программу в таблице, чтобы прочитать её официальное описание.
+> **💡 Tip**: Hidden applications (Microsoft Store, drivers, system libraries) are filtered out by default. You can enable them at any time by checking **"Show system and hidden applications"**. You can also hover over any program in the table to read its official description.
 
-### После переустановки Windows
+### After Windows Reinstallation
 
-**Если выбрали "Онлайн-скрипт":**
-- Запустите созданный `.bat` или `.ps1` файл
-- Все приложения установятся автоматически
+**If you chose "Online Script":**
+- Run the created `.bat` or `.ps1` file
+- All applications will be installed automatically
 
-**Если выбрали "Оффлайн-пакет":**
-- Скопируйте папку с файлами на новую систему
-- Запустите `install_all.bat`
-- Если рядом есть `RestoreOnlineFallback.bat`, запустите его после offline-установки на машине с интернетом
+**If you chose "Offline Package":**
+- Copy the folder with files to the new system
+- Run `install_all.bat`
+- If `RestoreOnlineFallback.bat` is present, run it after offline installation on a machine with internet
 
-После экспорта PAS показывает сводку результата и кнопку открытия папки экспорта.
+After export, PAS shows a summary and a button to open the export folder.
 
-## Для разработчиков
+## For Developers
 
-### Требования
+### Requirements
 
 - .NET 10 SDK
 - Windows 10/11
 
-### Установка .NET 10 SDK
+### Installing .NET 10 SDK
 
 ```powershell
 winget install Microsoft.DotNet.SDK.10
 ```
 
-### Команды разработки
+### Development Commands
 
 ```powershell
-# Клонирование (если из Git)
-git clone <url>
+# Cloning (if from Git)
+git clone https://github.com/Almanex/Almanex-PAS_Portable-App-Sync.git
 cd PAS
 
-# Сборка
+# Build
 dotnet build
 
-# Запуск для тестирования
+# Run for testing
 dotnet run
 
-# Создание portable версии (один exe-файл)
+# Create portable version (single exe file)
 dotnet publish -c Release
 ```
 
-Готовый файл: `dist\PAS.exe`
+Ready file: `dist\PAS.exe`
 
-### Структура проекта
+### Project Structure
 
 ```
 PAS/
-├── Models/              # Модели данных
+├── Models/              # Data models
 │   ├── InstalledApp.cs
 │   ├── ExportMode.cs
 │   ├── ExportResult.cs
 │   └── WingetExportModels.cs
-├── Services/            # Бизнес-логика
+├── Services/            # Business logic
 │   ├── WingetService.cs
 │   ├── SystemScanService.cs
 │   ├── ScriptGeneratorService.cs
@@ -94,34 +96,35 @@ PAS/
 │   ├── MainWindow.xaml.cs
 │   ├── HelpWindow.xaml
 │   └── HelpWindow.xaml.cs
-├── Converters/          # XAML конвертеры
-└── README.md            # Полная документация
+├── Converters/          # XAML converters
+└── README.md            # Full documentation
 ```
 
-### Архитектура
+### Architecture
 
-- **Паттерн:** MVVM (Model-View-ViewModel)
-- **UI:** WPF с data binding
-- **Интеграция:** Winget CLI через Process API
-- **Async:** Все операции асинхронные (async/await)
+- **Pattern:** MVVM (Model-View-ViewModel)
+- **UI:** WPF with data binding
+- **Integration:** Winget CLI via Process API
+- **Async:** All operations are asynchronous (async/await)
 
-## Полезные ссылки
+## Useful Links
 
-- [README.md](README.md) — Полная документация
+- [README.md](README.md) — Full documentation
+- [README_RU.md](README_RU.md) — Russian version
 
-## Поддержка
+## Support
 
-Если что-то не работает:
-1. Проверьте наличие Winget: `winget --version`
-2. Посмотрите лог: `%LocalAppData%\PAS\PAS.log`
-3. Убедитесь, что у вас Windows 10 (1809+) или Windows 11
+If something doesn't work:
+1. Check Winget presence: `winget --version`
+2. Check log: `%LocalAppData%\PAS\PAS.log`
+3. Ensure you have Windows 10 (1809+) or Windows 11
 
-### Ошибки загрузки в оффлайн-режиме
+### Offline Download Errors
 
-Некоторые приложения (VS Code, Git, Android Studio) **не поддерживают загрузку дистрибутивов** через `winget download`. Это нормально: PAS пометит их как пропущенные и автоматически создаст `RestoreOnlineFallback.bat` для последующей online-установки.
+Some applications (VS Code, Git, Android Studio) **do not support downloading distributions** via `winget download`. This is normal: PAS will mark them as skipped and automatically create `RestoreOnlineFallback.bat` for subsequent online installation.
 
-Служебные компоненты вроде `Microsoft Edge Update` исключаются из экспорта по умолчанию. Чтобы проверить, что исключено, включите показ системных/скрытых приложений и выберите фильтр "Исключены по умолчанию".
+Service components like `Microsoft Edge Update` are excluded from export by default. To check what's excluded, enable system/hidden apps and select the "Excluded by Default" filter.
 
-## Лицензия
+## License
 
-MIT License — используйте свободно!
+MIT License — use freely!
