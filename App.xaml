@@ -1,0 +1,10 @@
+<Application x:Class="PAS.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:PAS"
+             xmlns:converters="clr-namespace:PAS.Converters">
+    <Application.Resources>
+        <converters:EnumToBoolConverter x:Key="EnumToBoolConverter"/>
+        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Application.Resources>
+</Application>

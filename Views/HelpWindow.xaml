@@ -1,0 +1,205 @@
+<Window x:Class="PAS.Views.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="{Binding HelpWindowTitle}"
+        Height="620" Width="860"
+        WindowStartupLocation="CenterOwner"
+        Background="#F3F3F3"
+        Icon="/icon.ico"
+        FontFamily="Segoe UI Variable Text, Segoe UI"
+        TextOptions.TextFormattingMode="Display"
+        TextOptions.TextRenderingMode="ClearType">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="SurfaceBrush" Color="#FFFFFF"/>
+        <SolidColorBrush x:Key="BorderBrushSoft" Color="#E6E6E6"/>
+        <SolidColorBrush x:Key="TextBrush" Color="#1F1F1F"/>
+        <SolidColorBrush x:Key="MutedTextBrush" Color="#616161"/>
+        <SolidColorBrush x:Key="AccentBrush" Color="#2563EB"/>
+        <SolidColorBrush x:Key="AccentHoverBrush" Color="#1D4ED8"/>
+
+        <Style TargetType="TextBlock" x:Key="HeaderStyle">
+            <Setter Property="FontSize" Value="19"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            <Setter Property="Margin" Value="0,0,0,12"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="SubHeaderStyle">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            <Setter Property="Margin" Value="0,14,0,6"/>
+        </Style>
+
+        <Style TargetType="TextBlock" x:Key="BodyStyle">
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="{StaticResource MutedTextBrush}"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="LineHeight" Value="20"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+        </Style>
+
+        <Style x:Key="PrimaryButton" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource AccentBrush}"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Padding" Value="18,8"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                CornerRadius="7"
+                                Padding="{TemplateBinding Padding}">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                              VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="{StaticResource AccentHoverBrush}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="TabControl">
+            <Setter Property="Background" Value="{StaticResource SurfaceBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource BorderBrushSoft}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Padding" Value="8"/>
+        </Style>
+
+        <Style TargetType="TabItem">
+            <Setter Property="Padding" Value="14,8"/>
+            <Setter Property="Margin" Value="0,0,4,0"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Foreground" Value="{StaticResource MutedTextBrush}"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                Background="{StaticResource SurfaceBrush}"
+                BorderBrush="{StaticResource BorderBrushSoft}"
+                BorderThickness="1"
+                CornerRadius="8"
+                Padding="18"
+                Margin="0,0,0,14">
+            <StackPanel>
+                <TextBlock Text="{Binding HelpMainTitle}"
+                           FontSize="25"
+                           FontWeight="SemiBold"
+                           Foreground="{StaticResource TextBrush}"/>
+                <TextBlock Text="PAS"
+                           FontSize="13"
+                           Foreground="{StaticResource MutedTextBrush}"
+                           Margin="0,3,0,0"/>
+            </StackPanel>
+        </Border>
+
+        <Border Grid.Row="1"
+                Background="{StaticResource SurfaceBrush}"
+                BorderBrush="{StaticResource BorderBrushSoft}"
+                BorderThickness="1"
+                CornerRadius="8"
+                ClipToBounds="True">
+            <TabControl BorderThickness="0" Padding="8">
+
+                <TabItem Header="{Binding HelpTabOverview}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="{Binding HelpOverviewHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpOverviewDesc}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpOverviewFeaturesHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpOverviewFeatures}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpOverviewReqHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpOverviewReq}"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Header="{Binding HelpTabScan}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="{Binding HelpScanHeader}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpScanAutoHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpScanAutoDesc}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpScanCacheHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpScanCacheDesc}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpScanRefreshHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpScanRefreshDesc}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpScanDetailsDesc}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpScanWarningHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpScanWarningDesc}"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Header="{Binding HelpTabExport}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="{Binding HelpExportHeader}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpExportOnlineHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpExportOnlineDesc}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpExportOfflineHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpExportOfflineDesc}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpExportProcessHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpExportProcessDesc}"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Header="{Binding HelpTabInstall}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="{Binding HelpInstallHeader}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpInstallRunHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpInstallRunDesc}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpInstallProcessHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpInstallProcessDesc}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpInstallProblemsHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpInstallProblemsDesc}"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+
+                <TabItem Header="{Binding HelpTabTips}">
+                    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="20">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource HeaderStyle}" Text="{Binding HelpTipsHeader}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpTipsPerfHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpTipsPerfDesc}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpTipsModeHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpTipsModeDesc}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpTipsManyAppsHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpTipsManyAppsDesc}"/>
+                            <TextBlock Style="{StaticResource SubHeaderStyle}" Text="{Binding HelpTipsBackupHeader}"/>
+                            <TextBlock Style="{StaticResource BodyStyle}" Text="{Binding HelpTipsBackupDesc}"/>
+                        </StackPanel>
+                    </ScrollViewer>
+                </TabItem>
+
+            </TabControl>
+        </Border>
+
+        <Button Grid.Row="2"
+                Content="{Binding HelpClose}"
+                Width="112"
+                Height="38"
+                HorizontalAlignment="Right"
+                Margin="0,14,0,0"
+                Click="CloseButton_Click"
+                Style="{StaticResource PrimaryButton}"/>
+    </Grid>
+</Window>

@@ -1,0 +1,31 @@
+## .NET/WPF
+[Bb]in/
+[Oo]bj/
+dist/
+.dotnet-home/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+packages/
+*.nupkg
+*.snk
+
+## IDE
+.Dev_Doc/
+.vs/
+.vscode/
+*.swp
+*~
+.DS_Store
+
+## Build
+publish/
+*.Publish.json
+
+## Logs
+*.log
+
+## Test artifacts
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
