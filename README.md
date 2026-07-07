@@ -4,6 +4,7 @@
 
 - 📝 **Automatic logging** of all operations
 - 🚀 **Portable** — no installation required, single `.exe` file
+- 🎨 **Modern Fluent UI** — styled with WPF-UI 4.3.0, supporting Light/Dark themes and system theme matching
 - 🎯 **Smart filtering** — by default indexes only user applications (with option to show hidden system components)
 - ℹ️ **Detailed info** — background loading of official descriptions and human-readable names. If the app name is not yet loaded, the package ID is displayed instead (they are often identical).
 
@@ -12,7 +13,7 @@
 ## 🛠️ Technologies
 
 - **.NET 10.0** — modern development platform
-- **WPF** — Windows Presentation Foundation for UI
+- **WPF & WPF-UI (v4.3.0)** — Fluent design system and modern controls
 - **Winget** — Windows Package Manager for package management
 - **MVVM** — architectural pattern for separation of logic and presentation
 

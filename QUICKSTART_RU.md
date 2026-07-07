@@ -6,7 +6,7 @@
 
 Portable executable находится здесь:
 ```
-bin\Release\net10.0-windows\win-x64\publish\PAS.exe
+dist\PAS.exe
 ```
 
 Просто скопируйте этот файл куда угодно и запустите — установка не требуется!

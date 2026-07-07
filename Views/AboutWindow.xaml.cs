@@ -2,13 +2,16 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Navigation;
 using PAS.Services;
+using Wpf.Ui.Appearance;
+using Wpf.Ui.Controls;
 
 namespace PAS.Views;
 
-public partial class AboutWindow : Window
+public partial class AboutWindow : FluentWindow
 {
     public AboutWindow()
     {
+        SystemThemeWatcher.Watch(this, WindowBackdropType.None);
         InitializeComponent();
         DataContext = LocalizationManager.Instance;
     }

@@ -243,6 +243,30 @@ public class LocalizationManager : INotifyPropertyChanged
             ["ru"] = "Язык:",
             ["de"] = "Sprache:"
         },
+        ["ThemeLabel"] = new()
+        {
+            ["en"] = "Theme:",
+            ["ru"] = "Тема:",
+            ["de"] = "Thema:"
+        },
+        ["ThemeSystem"] = new()
+        {
+            ["en"] = "System",
+            ["ru"] = "Системная",
+            ["de"] = "System"
+        },
+        ["ThemeLight"] = new()
+        {
+            ["en"] = "Light",
+            ["ru"] = "Светлая",
+            ["de"] = "Hell"
+        },
+        ["ThemeDark"] = new()
+        {
+            ["en"] = "Dark",
+            ["ru"] = "Темная",
+            ["de"] = "Dunkel"
+        },
         // ── Status messages (used in ViewModel) ──
         ["StatusReady"] = new()
         {
@@ -902,6 +926,10 @@ public class LocalizationManager : INotifyPropertyChanged
     public string ExportOfflineOption => Get("ExportOfflineOption");
     public string CancelButton       => Get("CancelButton");
     public string LanguageLabel      => Get("LanguageLabel");
+    public string ThemeLabel         => Get("ThemeLabel");
+    public string ThemeSystem        => Get("ThemeSystem");
+    public string ThemeLight         => Get("ThemeLight");
+    public string ThemeDark          => Get("ThemeDark");
     // HelpWindow — structural
     public string HelpWindowTitle    => Get("HelpWindowTitle");
     public string HelpMainTitle      => Get("HelpMainTitle");

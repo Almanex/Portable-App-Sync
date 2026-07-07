@@ -8,7 +8,7 @@
 
 The portable executable is located here:
 ```
-bin\Release\net10.0-windows\win-x64\publish\PAS.exe
+dist\PAS.exe
 ```
 
 Just copy this file anywhere and run it — no installation required!

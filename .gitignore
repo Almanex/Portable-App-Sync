@@ -29,3 +29,6 @@ publish/
 ## Test artifacts
 [Tt]est[Rr]esult*/
 [Bb]uild[Ll]og.*
+
+## Agent Customizations
+.agents/
