@@ -1,6 +1,6 @@
 # Quick Start — PAS (Portable App Sync)
 
-🇷🇺 **[Russian version / Русская версия](QUICKSTART_RU.md) | [ User Guide ](USER_GUIDE.md) • [ Руководство пользователя ](USER_GUIDE_RU.md)**
+[Russian version / Русская версия](QUICKSTART_RU.md) | [ User Guide ](GUIDE.md)
 
 ## For Users
 
@@ -20,11 +20,11 @@ Just copy this file anywhere and run it — no installation required!
 3. **Select** the applications you want to save (checkboxes)
    - Use the view filter to quickly show only offline-ready apps, online fallback, or excluded items
 4. **Select mode**:
-   - 📄 **Online Script** — if the new system will have internet (recommended)
-   - 💾 **Offline Package** — if you need a hybrid set: local installers + fallback script for apps that cannot be downloaded offline
+   - **Online Script** — if the new system will have internet (recommended)
+   - **Offline Package** — if you need a hybrid set: local installers + fallback script for apps that cannot be downloaded offline
 5. **Click** the export button
 
-> **💡 Tip**: Hidden applications (Microsoft Store, drivers, system libraries) are filtered out by default. You can enable them at any time by checking **"Show system and hidden applications"**. You can also hover over any program in the table to read its official description.
+> **Tip**: Hidden applications (Microsoft Store, drivers, system libraries) are filtered out by default. You can enable them at any time by checking **"Show system and hidden applications"**. You can also hover over any program in the table to read its official description.
 
 ### After Windows Reinstallation
 
@@ -97,7 +97,7 @@ PAS/
 │   ├── HelpWindow.xaml
 │   └── HelpWindow.xaml.cs
 ├── Converters/          # XAML converters
-└── README.md            # Full documentation
+└── README.md            # Full documentation (relative link back to root: ../README.md)
 ```
 
 ### Architecture
@@ -109,7 +109,7 @@ PAS/
 
 ## Useful Links
 
-- [README.md](README.md) — Full documentation
+- [README.md](../README.md) — Full documentation
 - [README_RU.md](README_RU.md) — Russian version
 
 ## Support

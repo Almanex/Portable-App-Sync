@@ -1,10 +1,12 @@
+[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md) | [ Quick Start ](QUICKSTART.md) • [ User Guide ](GUIDE.md) • [ Руководство пользователя ](GUIDE_RU.md)
+
 # PAS (Portable App Sync) — Comprehensive User Guide
 
 Welcome to the comprehensive user guide for **PAS (Portable App Sync)**! This guide will walk you through the inner workings of the application, help you understand the backup and restore processes, explain the filter systems, and show you how to resolve common troubleshooting scenarios.
 
 ---
 
-## 🧭 Application Workflow
+## Application Workflow
 
 The diagram below outlines the overall workflow of backing up and restoring your applications using PAS.
 
@@ -36,7 +38,7 @@ flowchart TD
 
 ---
 
-## 🔍 Understanding Application Filtering
+## Understanding Application Filtering
 
 By default, PAS scans all installed applications on your computer using the Windows Package Manager (Winget). To prevent cluttering your backup list with system packages or runtime libraries, the application applies smart filters:
 
@@ -57,7 +59,7 @@ If you want to back up a hidden system component (like a specific runtime or sto
 
 ---
 
-## 💾 Export Modes Explained
+## Export Modes Explained
 
 PAS offers two distinct methods for backing up your application configuration. Choosing the right one depends on your destination machine's environment.
 
@@ -89,7 +91,7 @@ This mode attempts to download all installer files (`.exe`, `.msi`, `.msix`) to 
 
 ---
 
-## 🔄 Restoration Steps
+## Restoration Steps
 
 To restore your applications on a fresh Windows installation, follow these procedures.
 
@@ -107,7 +109,7 @@ To restore your applications on a fresh Windows installation, follow these proce
 
 ---
 
-## 🛠 Troubleshooting Common Issues
+## Troubleshooting Common Issues
 
 ### 1. Winget is missing on the target machine
 **Symptom**: The restore script warns that the `winget` command was not found.
@@ -118,7 +120,7 @@ To restore your applications on a fresh Windows installation, follow these proce
 
 ### 2. Apps are skipped during offline download
 **Symptom**: PAS log shows warnings about skipped downloads, and some apps are not in the offline folder.
-- **Explanation**: This is normal behavior due to licencing or publisher constraints. The installer cannot be downloaded ahead of time. These applications are automatically placed into the online fallback script.
+- **Explanation**: This is normal behavior due to licensing or publisher constraints. The installer cannot be downloaded ahead of time. These applications are automatically placed into the online fallback script.
 
 ### 3. Permission Errors
 **Symptom**: Scripts fail to run, or installers exit with errors.
