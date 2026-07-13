@@ -12,6 +12,12 @@
 
 **[Russian version of README / Russian version](docs/README_RU.md)**
 
+<p align="center">
+  <img src="screenshots/cover.png" alt="Portable App Sync" width="95%" />
+</p>
+
+---
+
 ## Technologies
 
 - **.NET 10.0** modern development platform

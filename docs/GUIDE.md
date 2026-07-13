@@ -6,6 +6,12 @@ Welcome to the comprehensive user guide for **PAS (Portable App Sync)**! This gu
 
 ---
 
+<p align="center">
+  <img src="../screenshots/cover.png" alt="Portable App Sync" width="95%" />
+</p>
+
+---
+
 ## Application Workflow
 
 The diagram below outlines the overall workflow of backing up and restoring your applications using PAS.

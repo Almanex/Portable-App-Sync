@@ -12,6 +12,12 @@
 
 ---
 
+<p align="center">
+  <img src="../screenshots/cover.png" alt="Portable App Sync" width="95%" />
+</p>
+
+---
+
 ## Технологии
 
 - **.NET 10.0:** современная платформа разработки.
