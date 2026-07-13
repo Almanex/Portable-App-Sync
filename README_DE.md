@@ -1,4 +1,4 @@
-[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md)
+[ English ](README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md) | [ Quick Start ](QUICKSTART.md) • [ User Guide ](USER_GUIDE.md)
 
 # PAS (Portable App Sync)
 
@@ -63,8 +63,8 @@
 
 ```powershell
 # Clone the repository
-git clone https://github.com/Almanex/Almanex-PAS_Portable-App-Sync.git
-cd PAS
+git clone https://github.com/Almanex/Portable-App-Sync.git
+cd Portable-App-Sync
 
 # Build the project
 dotnet build

@@ -1,5 +1,7 @@
 # Быстрый старт — PAS (Portable App Sync)
 
+🇺🇸 **[English version / Английская версия](QUICKSTART.md) | [ User Guide ](USER_GUIDE.md) • [ Руководство пользователя ](USER_GUIDE_RU.md)**
+
 ## Для пользователей
 
 ### Где найти готовое приложение?
@@ -54,8 +56,8 @@ winget install Microsoft.DotNet.SDK.10
 
 ```powershell
 # Клонирование (если из Git)
-git clone <url>
-cd PAS
+git clone https://github.com/Almanex/Portable-App-Sync.git
+cd Portable-App-Sync
 
 # Сборка
 dotnet build

@@ -1,6 +1,6 @@
 # Quick Start — PAS (Portable App Sync)
 
-🇷🇺 **[Russian version / Русская версия](QUICKSTART_RU.md)**
+🇷🇺 **[Russian version / Русская версия](QUICKSTART_RU.md) | [ User Guide ](USER_GUIDE.md) • [ Руководство пользователя ](USER_GUIDE_RU.md)**
 
 ## For Users
 
@@ -56,8 +56,8 @@ winget install Microsoft.DotNet.SDK.10
 
 ```powershell
 # Cloning (if from Git)
-git clone https://github.com/Almanex/Almanex-PAS_Portable-App-Sync.git
-cd PAS
+git clone https://github.com/Almanex/Portable-App-Sync.git
+cd Portable-App-Sync
 
 # Build
 dotnet build
