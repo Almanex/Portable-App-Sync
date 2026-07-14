@@ -1,7 +1,5 @@
 # Быстрый старт — PAS (Portable App Sync)
 
-[English version / Английская версия](QUICKSTART.md) | [ User Guide ](GUIDE.md) • [ Руководство пользователя ](GUIDE_RU.md)
-
 ## Для пользователей
 
 ### Где найти готовое приложение?

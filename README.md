@@ -1,6 +1,9 @@
-[ English ](README.md) • [ Русский ](docs/README_RU.md) • [ Deutsch ](docs/README_DE.md) | [ Quick Start ](docs/QUICKSTART.md) • [ User Guide ](docs/GUIDE.md)
-
 # PAS (Portable App Sync)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Platform: Windows](https://img.shields.io/badge/Platform-Windows-0078d7.svg)](https://microsoft.com/windows)
+[![.NET Version](https://img.shields.io/badge/.NET-10.0-512bd4.svg)](https://dotnet.microsoft.com/)
+[![Share](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FPortable-App-Sync)](https://twitter.com/intent/tweet?text=Check%20out%20Portable%20App%20Sync%20-%20automated%20backup%20and%20restore%20of%20installed%20Windows%20applications&url=https%3A%2F%2Fgithub.com%2FAlmanex%2FPortable-App-Sync)
 
 **A portable utility to automate backup and restore of installed Windows applications**
 
@@ -10,13 +13,12 @@
 - **Smart filtering** by default indexes only user applications (with option to show hidden system components)
 - **Detailed info** background loading of official descriptions and human-readable names. If the app name is not yet loaded, the package ID is displayed instead (they are often identical).
 
-**[Russian version of README / Russian version](docs/README_RU.md)**
+## Documentation
 
-<p align="center">
-  <img src="screenshots/cover.png" alt="Portable App Sync" width="95%" />
-</p>
+- **[Quick Start Guide](docs/QUICKSTART.md)**: A brief guide to launching and using the application.
+- **[User Guide](docs/GUIDE.md)**: A comprehensive reference explaining filtering, export modes, hybrid fallback, restoration steps, and troubleshooting.
 
----
+
 
 ## Technologies
 

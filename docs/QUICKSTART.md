@@ -1,7 +1,5 @@
 # Quick Start — PAS (Portable App Sync)
 
-[Russian version / Русская версия](QUICKSTART_RU.md) | [ User Guide ](GUIDE.md)
-
 ## For Users
 
 ### Where to find the ready-to-use application?

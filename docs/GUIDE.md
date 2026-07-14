@@ -1,16 +1,8 @@
-[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md) | [ Quick Start ](QUICKSTART.md) • [ User Guide ](GUIDE.md) • [ Руководство пользователя ](GUIDE_RU.md)
-
 # PAS (Portable App Sync) — Comprehensive User Guide
 
 Welcome to the comprehensive user guide for **PAS (Portable App Sync)**! This guide will walk you through the inner workings of the application, help you understand the backup and restore processes, explain the filter systems, and show you how to resolve common troubleshooting scenarios.
 
----
 
-<p align="center">
-  <img src="../screenshots/cover.png" alt="Portable App Sync" width="95%" />
-</p>
-
----
 
 ## Application Workflow
 

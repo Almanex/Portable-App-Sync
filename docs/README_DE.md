@@ -1,5 +1,3 @@
-[ English ](../README.md) • [ Русский ](README_RU.md) • [ Deutsch ](README_DE.md) | [ Quick Start ](QUICKSTART.md) • [ User Guide ](GUIDE.md)
-
 # PAS (Portable App Sync)
 
 **Ein tragbares Dienstprogramm zur Automatisierung der Sicherung und Wiederherstellung installierter Windows-Anwendungen**
@@ -10,13 +8,13 @@
 - **Intelligente Filterung** indiziert standardmäßig nur Benutzeranwendungen (mit der Option, versteckte Systemkomponenten anzuzeigen)
 - **Detaillierte Informationen** Laden offizieller Beschreibungen und für Menschen lesbarer Namen im Hintergrund. Wenn der App-Name noch nicht geladen ist, wird stattdessen die Paket-ID angezeigt (diese sind oft identisch).
 
-**[Russische Version von README / Russische Version](README_RU.md)**
+## Dokumentation
 
-<p align="center">
-  <img src="../screenshots/cover.png" alt="Portable App Sync" width="95%" />
-</p>
+Detaillierte Handbücher zur Verwendung der Anwendung:
+- **[Schnellstartanleitung](QUICKSTART.md)**: Eine kurze Anleitung zum Starten und Verwenden der Anwendung.
+- **[Benutzerhandbuch](GUIDE_DE.md)**: Ein umfassendes Referenzhandbuch, das die Filterung, die Exportmodi, den Hybrid-Fallback, die Wiederherstellungsschritte und die Fehlerbehebung erklärt.
 
----
+
 
 ## Technologien
 
