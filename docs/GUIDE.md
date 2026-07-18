@@ -1,12 +1,21 @@
-# PAS (Portable App Sync) — Comprehensive User Guide
+# User Guide for Portable App Sync — How to Back Up and Restore Installed Windows Applications
 
-Welcome to the comprehensive user guide for **PAS (Portable App Sync)**! This guide will walk you through the inner workings of the application, help you understand the backup and restore processes, explain the filter systems, and show you how to resolve common troubleshooting scenarios.
+> [!NOTE]
+> **Quick Summary**
+> - Back up all your installed desktop programs to a lightweight script or offline package before reinstalling Windows.
+> - Restore your setup with a single click using Windows Package Manager (Winget).
+> - Smart filtering hides system files, runtimes, and dependencies by default.
+> - Automatically handles non-downloadable programs using online fallback scripts.
 
+---
 
+## Introduction to Portable App Sync
 
-## Application Workflow
+Reinstalling Windows or setting up a new PC is often a painful process because you need to manually find, download, and install all of your applications. **Portable App Sync (PAS)** is a free, lightweight, and portable utility designed to automate the backup and restore of Windows applications. Leveraging the official Microsoft Windows Package Manager (Winget), PAS helps you scan your system, filter out junk libraries, and export your application list into executable scripts or hybrid offline installers. By using PAS, you can save hours of setup time and ensure that your new system has exactly the programs you need.
 
-The diagram below outlines the overall workflow of backing up and restoring your applications using PAS.
+### Application Workflow
+
+The diagram below outlines the overall workflow of backing up and restoring your applications using PAS:
 
 ```mermaid
 flowchart TD
@@ -36,97 +45,65 @@ flowchart TD
 
 ---
 
-## Understanding Application Filtering
+## Key Features and Capabilities
 
-By default, PAS scans all installed applications on your computer using the Windows Package Manager (Winget). To prevent cluttering your backup list with system packages or runtime libraries, the application applies smart filters:
+### Application Discovery and Scan
+Upon startup, Portable App Sync performs a fast system-wide scan to detect all installed software. It fetches the official human-readable name, the package identifier (Package ID), and description details in the background.
 
-- **User Desktop Applications (Default)**: Displays standard applications installed by the user (e.g., Google Chrome, VS Code, Discord, WinRAR).
-- **Microsoft Store Apps**: Hidden by default. Includes pre-installed Windows packages (UWP/MSIX), such as Calculator, Xbox, Photos, etc.
-- **System Components**: Hidden by default. Includes compilers, drivers, configuration packages, and shared runtimes (e.g., C++ Redistributables, .NET Runtimes).
-- **Technical Dependencies**: Hidden by default. Framework runtimes and libraries like `VCLibs` or `WindowsAppRuntime`.
+### Smart Filtering System
+To keep your backup clean, PAS differentiates between user-installed programs and system overhead:
+- **User Desktop Applications**: This covers your primary software like browsers, editors, and players.
+- **Microsoft Store Apps**: Pre-installed UWP/MSIX packages (Xbox, Calculator, Photos) that are normally handled by the system account.
+- **System Components and Runtimes**: Drivers, SDKs, and Visual C++ runtimes that are typically reinstalled automatically or bundled.
+- **Technical Dependencies**: Low-level framework runtimes like `WindowsAppRuntime`.
 
-### How to Toggle Filters
-If you want to back up a hidden system component (like a specific runtime or store app):
-1. Check the box **"Show system and hidden applications"** at the top of the interface.
-2. The list will instantly refresh to display all scanned packages.
-3. Use the view filter selection:
-   - **All Visible**: Displays all currently unfiltered programs.
-   - **Available Offline**: Displays only applications that support downloading their installers via Winget.
-   - **Online Fallback**: Displays applications that will need to be downloaded from the internet during recovery because they don't support direct downloading.
-   - **Excluded by Default**: Displays updater components or system utilities that are excluded from backups by default (e.g., `Microsoft Edge Update`) to prevent conflict.
+### Multiple Export Modes
+- **Online Script**: Generates a compact command-line batch (`.bat`) or PowerShell (`.ps1`) script. When run on the new system, it instructs Winget to fetch and install the latest versions of your selected programs directly from the official repositories.
+- **Offline Package**: Downloads the offline installers of all compatible applications into a local directory. For apps that restrict direct installer downloading (e.g. Visual Studio Code, Git, Android Studio), PAS automatically falls back to an online backup script, creating a hybrid installer set.
 
 ---
 
-## Export Modes Explained
+## Step-by-Step Setup Guide
 
-PAS offers two distinct methods for backing up your application configuration. Choosing the right one depends on your destination machine's environment.
+Follow these simple steps to successfully back up and restore your Windows programs:
 
-### 1. Online Script (Recommended)
-This mode generates a lightweight command script that pulls installers directly from Microsoft's official Winget repositories during the restore process.
-
-- **Files Generated**: `RestoreApps.bat` (and/or `RestoreApps.ps1`).
-- **Ideal For**: Restoring applications on a machine with a stable internet connection.
-- **Pros**: 
-  - Ultra-small backup size (only a few kilobytes).
-  - Always installs the **latest versions** of the apps at the time of restoration.
-  - Highly reliable.
-- **Cons**: Requires active internet connection during restore.
-
-### 2. Offline Package
-This mode attempts to download all installer files (`.exe`, `.msi`, `.msix`) to a local folder so they can be installed without internet access.
-
-- **Files Generated**: A folder containing installer files, `install_all.bat` (offline installer script), and potentially `RestoreOnlineFallback.bat` (online fallback script).
-- **Ideal For**: Air-gapped machines, corporate networks with restricted internet, or saving bandwidth.
-- **Pros**: Installs applications fast without downloading them during setup.
-- **Cons**: Large backup size (several gigabytes depending on selected apps).
-
-> [!IMPORTANT]
-> **The Hybrid Fallback Mechanism**: Many publishers (e.g., Microsoft for VS Code, Git, Android Studio) restrict direct installer downloading via Winget. 
-> 
-> To prevent backup failures, PAS automatically identifies these unsupported packages, skips downloading them offline, and puts them into `RestoreOnlineFallback.bat`. 
-> 
-> When restoring, run `install_all.bat` first to install offline packages, then run `RestoreOnlineFallback.bat` once you have an internet connection to install the remaining applications.
+1. **Step 1: Launch the application** — Copy `PAS.exe` to a convenient location (like your Desktop or a USB drive) and run it. No installation is required.
+2. **Step 2: Filter and select applications** — Review the list of scanned applications. Check the boxes next to the software you want to save. If you need system runtimes or Store apps, check the **"Show system and hidden applications"** option.
+3. **Step 3: Select export mode** — Choose between **Online Script** (lightweight, requires internet during restore) or **Offline Package** (downloads installer files locally).
+4. **Step 4: Export your backup** — Click the export button, select the directory where you want to save the backup, and wait for the operation to complete.
+5. **Step 5: Run restoration on the new system** — Copy the exported files to the target machine. Right-click the restore script (such as `RestoreApps.bat` or `install_all.bat`) and select **"Run as Administrator"** to begin automated installation.
 
 ---
 
-## Restoration Steps
+## Keyboard Shortcuts and Operation Tips
 
-To restore your applications on a fresh Windows installation, follow these procedures.
+Although Portable App Sync features a clean graphical user interface, you can navigate it easily using standard Windows keyboard controls:
 
-### How to run the Online Script
-1. Copy `RestoreApps.bat` or `RestoreApps.ps1` to the target computer.
-2. Right-click the script and select **"Run as Administrator"**.
-3. A command prompt window will open. If Winget is not installed, the script will prompt you and provide instructions on how to install it.
-4. Wait for the automated installer to finish.
+| Shortcut / Command | Action / Purpose |
+| --- | --- |
+| `Tab` | Move keyboard focus between search bars, the application table, filters, and export buttons. |
+| `Space` | Select or deselect the application check box currently in focus. |
+| `Arrow Up / Down` | Navigate through the table list of scanned desktop applications. |
+| `Alt + F4` | Instantly close the Portable App Sync application. |
+| `Enter` | Trigger the selected filter button or execute the export command. |
 
-### How to run the Offline Package
-1. Copy the exported folder containing `install_all.bat` and the installers to the target computer.
-2. Right-click `install_all.bat` and select **"Run as Administrator"**.
-3. All local installers will be run silently or with basic progress indicators.
-4. If a `RestoreOnlineFallback.bat` was created, run it as Administrator after connecting the computer to the internet to fetch the remaining applications.
+### Pro Tips for Efficiency
+- **Column Sorting**: Click any column header (such as Name, Source, or Package ID) to sort the list and quickly find specific tools.
+- **Search Filtering**: Type inside the search box at the top to instantly filter programs by name or package ID.
+- **Admin Execution**: Always run your exported recovery scripts as Administrator to prevent third-party installers from prompting or failing due to permissions.
 
 ---
 
-## Troubleshooting Common Issues
+## Frequently Asked Questions and Troubleshooting
 
-### 1. Winget is missing on the target machine
-**Symptom**: The restore script warns that the `winget` command was not found.
-- **Solution**: Winget is pre-installed on Windows 11 and recent builds of Windows 10. If it is missing:
-  1. Open the Microsoft Store and search for **"App Installer"**.
-  2. Click **"Update"** or **"Install"**.
-  3. Alternatively, download the latest `.msixbundle` from the official [GitHub repository](https://github.com/microsoft/winget-cli/releases) and run it.
+### What should I do if Winget is missing on the target computer?
+Winget is included by default in Windows 11 and recent builds of Windows 10. If it is missing, the restore script will automatically warn you. To install it manually, open the Microsoft Store, search for **"App Installer"**, and update it. Alternatively, download the latest package from the official [GitHub repository](https://github.com/microsoft/winget-cli/releases).
 
-### 2. Apps are skipped during offline download
-**Symptom**: PAS log shows warnings about skipped downloads, and some apps are not in the offline folder.
-- **Explanation**: This is normal behavior due to licensing or publisher constraints. The installer cannot be downloaded ahead of time. These applications are automatically placed into the online fallback script.
+### Why are some applications skipped during the offline package export?
+Some software publishers (such as Microsoft for Visual Studio Code, Git, or Google for Android Studio) prohibit direct downloading of their installers via the Winget API. When this happens, PAS skips downloading them and adds them to `RestoreOnlineFallback.bat`. To recover these, run `install_all.bat` first, connect to the internet, and then run `RestoreOnlineFallback.bat`.
 
-### 3. Permission Errors
-**Symptom**: Scripts fail to run, or installers exit with errors.
-- **Solution**: Ensure you are running the scripts **as Administrator**. Many desktop applications require administrative privileges to write to `C:\Program Files` and register system services.
+### Why does the restoration script fail or prompt for permission?
+Most standard Windows applications write files to `C:\Program Files` and register system services, which require local administrative privileges. Ensure that you right-click the script and select **"Run as Administrator"**.
 
-### 4. Logging & Diagnostics
-If the application crashes or an operation fails, you can find logs here:
-- **Log Location**: `%LocalAppData%\PAS\PAS.log` (paste this in the Windows Explorer address bar).
-- **Log Properties**:
-  - Automatically rotated when it exceeds **5 MB**.
-  - Contains complete exception details and Winget CLI process outputs for quick diagnostic parsing.
+### Where can I check log files if an export fails?
+Portable App Sync logs all background operations in a text file. You can open it by pasting `%LocalAppData%\PAS\PAS.log` into the Windows Explorer address bar. The file is automatically rotated when it exceeds 5 MB.

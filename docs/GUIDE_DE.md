@@ -1,12 +1,21 @@
-# PAS (Portable App Sync) — Umfassendes Benutzerhandbuch
+# Benutzerhandbuch für Portable App Sync — Sichern und Wiederherstellen von installierten Windows-Anwendungen
 
-Willkommen zum umfassenden Benutzerhandbuch für **PAS (Portable App Sync)**! Diese Anleitung führt Sie durch die Funktionsweise der Anwendung, hilft Ihnen, die Sicherungs- und Wiederherstellungsprozesse zu verstehen, erklärt die Filtersysteme und zeigt Ihnen, wie Sie häufig auftretende Probleme lösen können.
+> [!NOTE]
+> **Schnellübersicht**
+> - Sichern Sie alle installierten Desktop-Programme als kompaktes Skript oder Offline-Paket vor der Neuinstallation von Windows.
+> - Stellen Sie Ihr Setup mit einem einzigen Klick über den Windows Package Manager (Winget) wieder her.
+> - Die intelligente Filterung blendet Systemdateien, Laufzeitbibliotheken und Abhängigkeiten standardmäßig aus.
+> - Automatische Verarbeitung von Programmen ohne direkten Download durch Online-Fallback-Skripte.
 
 ---
 
-## Anwendungs-Workflow
+## Einführung in Portable App Sync
 
-Das folgende Diagramm zeigt den allgemeinen Ablauf beim Sichern und Wiederherstellen Ihrer Anwendungen mit PAS.
+Die Neuinstallation von Windows oder das Einrichten eines neuen PCs ist oft ein mühsamer Prozess, da Sie alle Ihre Anwendungen manuell suchen, herunterladen und installieren müssen. **Portable App Sync (PAS)** ist ein kostenloses, leichtgewichtiges und tragbares Dienstprogramm zur Automatisierung der Sicherung und Wiederherstellung von Windows-Anwendungen. Unter Nutzung des offiziellen Microsoft Windows Package Manager (Winget) hilft Ihnen PAS, Ihr System zu scannen, unnötige Bibliotheken herauszufiltern und Ihre Anwendungsliste in ausführbare Skripte oder hybride Offline-Installationsprogramme zu exportieren. Mit PAS sparen Sie Stunden bei der Systemeinrichtung und stellen sicher, dass Ihr neues System genau die Programme enthält, die Sie benötigen.
+
+### Anwendungs-Workflow
+
+Das folgende Diagramm zeigt den allgemeinen Ablauf beim Sichern und Wiederherstellen Ihrer Anwendungen mit PAS:
 
 ```mermaid
 flowchart TD
@@ -36,97 +45,65 @@ flowchart TD
 
 ---
 
-## Anwendungsfilterung verstehen
+## Wichtige Funktionen und Fähigkeiten
 
-Standardmäßig scannt PAS alle installierten Anwendungen auf Ihrem Computer mithilfe des Windows-Paketmanagers (Winget). Um Ihre Sicherungsliste nicht mit Systempaketen oder Laufzeitbibliotheken zu überfrachten, wendet die Anwendung intelligente Filter an:
+### Anwendungserkennung und Systemscan
+Beim Start führt Portable App Sync einen schnellen systemweiten Scan durch, um alle installierte Software zu erkennen. Die Anwendung lädt den offiziellen Namen, die Paket-ID (Package ID) und Beschreibungen im Hintergrund.
 
-- **Benutzer-Desktopanwendungen (Standard)**: Zeigt Standardanwendungen an, die vom Benutzer installiert wurden (z. B. Google Chrome, VS Code, Discord, WinRAR).
-- **Microsoft Store Apps**: Standardmäßig ausgeblendet. Umfasst vorinstallierte Windows-Pakete (UWP/MSIX) wie Rechner, Xbox, Fotos usw.
-- **Systemkomponenten**: Standardmäßig ausgeblendet. Umfasst Compiler, Treiber, Konfigurationspakete und gemeinsam genutzte Laufzeiten (z. B. Visual C++ Redistributables, .NET Runtimes).
-- **Technische Abhängigkeiten**: Standardmäßig ausgeblendet. Framework-Laufzeiten und -Bibliotheken wie `VCLibs` oder `WindowsAppRuntime`.
+### Intelligentes Filtersystem
+Um Ihr Backup sauber zu halten, PAS unterscheidet zwischen benutzerinstallierten Programmen und System-Overhead:
+- **Benutzer-Desktopanwendungen**: Ihre Hauptsoftware wie Browser, Editoren und Player.
+- **Microsoft Store Apps**: Vorinstallierte UWP/MSIX-Pakete (Xbox, Rechner, Fotos), die normalerweise vom Systemkonto verwaltet werden.
+- **Systemkomponenten und Laufzeiten**: Treiber, SDKs und Visual C++-Laufzeiten, die in der Regel automatisch neu installiert oder mitgeliefert werden.
+- **Technische Abhängigkeiten**: Framework-Laufzeiten und -Bibliotheken wie `VCLibs` oder `WindowsAppRuntime`.
 
-### So schalten Sie Filter um
-Wenn Sie eine ausgeblendete Systemkomponente (z. B. eine bestimmte Laufzeit- oder Store-App) sichern möchten:
-1. Aktivieren Sie das Kontrollkästchen **"System und versteckte Anwendungen anzeigen"** oben auf der Benutzeroberfläche.
-2. Die Liste wird sofort aktualisiert, um alle gescannten Pakete anzuzeigen.
-3. Verwenden Sie den Ansichtsfilter:
-   - **Alle sichtbar**: Zeigt alle derzeit ungefilterten Programme an.
-   - **Offline verfügbar**: Zeigt nur Anwendungen an, die das Herunterladen ihrer Installationsprogramme über Winget unterstützen.
-   - **Online-Fallback**: Zeigt Anwendungen an, die während der Wiederherstellung aus dem Internet heruntergeladen werden müssen, da sie keinen direkten Download unterstützen.
-   - **Standardmäßig ausgeschlossen**: Zeigt Updater-Komponenten oder System-Dienstprogramme an, die standardmäßig von Backups ausgeschlossen sind (z. B. `Microsoft Edge Update`), um Konflikte zu vermeiden.
+### Mehrere Exportmodi
+- **Online-Skript**: Generiert ein kompaktes Kommandozeilen-Batch- (`.bat`) oder PowerShell-Skript (`.ps1`). Wenn es auf dem neuen System ausgeführt wird, weist es Winget an, die neuesten Versionen Ihrer ausgewählten Programme direkt aus den offiziellen Repositorys herunterzuladen und zu installieren.
+- **Offline-Paket**: Lädt die Offline-Installationsprogramme aller kompatibben Anwendungen in ein lokales Verzeichnis herunter. Für Apps, die das direkte Herunterladen einschränken (z. B. Visual Studio Code, Git, Android Studio), weicht PAS automatisch auf ein Online-Backup-Skript aus, wodurch ein hybrides Installations-Set entsteht.
 
 ---
 
-## Exportmodi erklärt
+## Schritt-für-Schritt-Anleitung zur Einrichtung
 
-PAS bietet zwei verschiedene Methoden zur Sicherung Ihrer Anwendungskonfiguration. Die Wahl des richtigen Modus hängt von der Umgebung Ihres Zielgeräts ab.
+Befolgen Sie diese einfachen Schritte, um Ihre Windows-Programme erfolgreich zu sichern und wiederherzustellen:
 
-### 1. Online-Skript (Empfohlen)
-Dieser Modus generiert ein leichtgewichtiges Befehlsskript, das die Installationsprogramme während des Wiederherstellungsprozesses direkt aus den offiziellen Winget-Repositorys von Microsoft herunterlädt.
-
-- **Generierte Dateien**: `RestoreApps.bat` (und/oder `RestoreApps.ps1`).
-- **Ideal für**: Wiederherstellung von Anwendungen auf einem Gerät mit einer stabilen Internetverbindung.
-- **Vorteile**:
-  - Extrem kleine Sicherungsgröße (nur wenige Kilobyte).
-  - Installiert zum Zeitpunkt der Wiederherstellung immer die **neuesten Versionen** der Apps.
-  - Sehr zuverlässig.
-- **Nachteile**: Erfordert eine aktive Internetverbindung während der Wiederherstellung.
-
-### 2. Offline-Paket
-Dieser Modus versucht, alle Installationsdateien (`.exe`, `.msi`, `.msix`) in einen lokalen Ordner herunterzuladen, damit sie ohne Internetzugang installiert werden können.
-
-- **Generierte Dateien**: Ein Ordner mit Installationsdateien, `install_all.bat` (Skript zur Offline-Installation) und möglicherweise `RestoreOnlineFallback.bat` (Skript für Online-Fallback).
-- **Ideal für**: Offline-Systeme, Unternehmensnetzwerke mit eingeschränktem Internet oder zur Bandbreitenschonung.
-- **Vorteile**: Installiert Anwendungen schnell und ohne Download während des Setups.
-- **Nachteile**: Große Sicherungsgröße (mehrere Gigabyte, je nach ausgewählten Apps).
-
-> [!IMPORTANT]
-> **Der Hybrid-Fallback-Mechanismus**: Viele Herausgeber (z. B. Microsoft für VS Code, Git, Android Studio) beschränken das direkte Herunterladen von Installationsprogrammen über Winget.
-> 
-> Um Sicherungsfehler zu vermeiden, erkennt PAS diese nicht unterstützten Pakete automatisch, überspringt das Herunterladen im Offline-Modus und fügt sie der Datei `RestoreOnlineFallback.bat` hinzu.
-> 
-> Führen Sie bei der Wiederherstellung zuerst `install_all.bat` aus, um die Offline-Pakete zu installieren, und führen Sie dann `RestoreOnlineFallback.bat` aus, sobald eine Internetverbindung besteht, um die verbleibenden Anwendungen zu installieren.
+1. **Schritt 1: Anwendung starten** — Kopieren Sie `PAS.exe` an einen praktischen Ort (z. B. Ihren Desktop oder ein USB-Laufwerk) und führen Sie es aus. Keine Installation erforderlich.
+2. **Schritt 2: Anwendungen filtern und auswählen** — Überprüfen Sie die Liste der gescannten Anwendungen. Aktivieren Sie die Kontrollkästchen neben der Software, die Sie sichern möchten. Wenn Sie Systemlaufzeiten oder Store-Apps benötigen, aktivieren Sie die Option **"System und versteckte Anwendungen anzeigen"**.
+3. **Schritt 3: Exportmodus auswählen** — Wählen Sie zwischen **Online-Skript** (leichtgewichtig, erfordert Internet während der Wiederherstellung) oder **Offline-Paket** (lädt Installationsdateien lokal herunter).
+4. **Schritt 4: Sicherung exportieren** — Klicken Sie auf die Export-Schaltfläche, wählen Sie das Verzeichnis aus, in dem das Backup gespeichert werden soll, und warten Sie, bis der Vorgang abgeschlossen ist.
+5. **Schritt 5: Wiederherstellung auf dem neuen System ausführen** — Kopieren Sie die exportierten Dateien auf den Zielcomputer. Klicken Sie mit der rechten Maustaste auf das Wiederherstellungsskript (z. B. `RestoreApps.bat` oder `install_all.bat`) und wählen Sie **"Als Administrator ausführen"**, um die automatische Installation zu starten.
 
 ---
 
-## Wiederherstellungsschritte
+## Tastenkombinationen und Tipps zur Bedienung
 
-Führen Sie die folgenden Schritte aus, um Ihre Anwendungen auf einer frischen Windows-Installation wiederherzustellen.
+Obwohl Portable App Sync über eine übersichtliche grafische Benutzeroberfläche verfügt, können Sie sich darin mithilfe der standardmäßigen Windows-Tastatursteuerung leicht bewegen:
 
-### So führen Sie das Online-Skript aus
-1. Kopieren Sie `RestoreApps.bat` oder `RestoreApps.ps1` auf den Zielcomputer.
-2. Klicken Sie mit der rechten Maustaste auf das Skript und wählen Sie **"Als Administrator ausführen"**.
-3. Ein Eingabeaufforderungsfenster öffnet sich. Wenn Winget nicht installiert ist, weist Sie das Skript darauf hin und bietet Anweisungen zur Installation.
-4. Warten Sie, bis die automatische Installation abgeschlossen ist.
+| Tastenkombination / Befehl | Aktion / Zweck |
+| --- | --- |
+| `Tab` | Verschieben Sie den Tastaturfokus zwischen Suchleisten, der Anwendungstabelle, Filtern und Export-Schaltflächen. |
+| `Leertaste` | Aktivieren oder deaktivieren Sie das Kontrollkästchen der aktuell fokussierten Anwendung. |
+| `Pfeiltaste oben / unten` | Navigieren Sie durch die Tabellenliste der gescannten Desktop-Anwendungen. |
+| `Alt + F4` | Schließen Sie die Portable App Sync-Anwendung sofort. |
+| `Eingabetaste` | Aktivieren Sie die ausgewählte Filterschaltfläche oder führen Sie den Exportbefehl aus. |
 
-### So führen Sie das Offline-Paket aus
-1. Kopieren Sie den exportierten Ordner mit `install_all.bat` und den Installationsprogrammen auf den Zielcomputer.
-2. Klicken Sie mit der rechten Maustaste auf `install_all.bat` und wählen Sie **"Als Administrator ausführen"**.
-3. Alle lokalen Installationsprogramme werden im Hintergrund oder mit einfachen Fortschrittsanzeigen ausgeführt.
-4. Wenn eine `RestoreOnlineFallback.bat` erstellt wurde, führen Sie diese als Administrator aus, nachdem Sie den Computer mit dem Internet verbunden haben, um die verbleibenden Anwendungen herunterzuladen.
+### Profi-Tipps für mehr Effizienz
+- **Spaltensortierung**: Klicken Sie auf einen beliebigen Spaltenkopf (wie Name, Quelle oder Paket-ID), um die Liste zu sortieren und bestimmte Tools schnell zu finden.
+- **Suchfilterung**: Tippen Sie in das Suchfeld oben, um Programme sofort nach Name oder Paket-ID zu filtern.
+- **Administrator-Ausführung**: Führen Sie Ihre exportierten Wiederherstellungsskripte immer als Administrator aus, um zu verhindern, dass Installationsprogramme von Drittanbietern nachfragen oder aufgrund fehlender Rechte fehlschlagen.
 
 ---
 
-## Fehlerbehebung bei häufigen Problemen
+## Häufig gestellte Fragen und Fehlerbehebung
 
-### 1. Winget fehlt auf dem Zielcomputer
-**Symptom**: Das Wiederherstellungsskript warnt, dass der Befehl `winget` nicht gefunden wurde.
-- **Lösung**: Winget ist auf Windows 11 und neueren Builds von Windows 10 vorinstalliert. Falls es fehlt:
-  1. Öffnen Sie den Microsoft Store und suchen Sie nach **"App-Installer"**.
-  2. Klicken Sie auf **"Aktualisieren"** oder **"Installieren"**.
-  3. Alternativ können Sie das neueste `.msixbundle` aus dem offiziellen [GitHub-Repository](https://github.com/microsoft/winget-cli/releases) herunterladen und ausführen.
+### Was soll ich tun, wenn Winget auf dem Zielcomputer fehlt?
+Winget ist standardmäßig in Windows 11 und neueren Builds von Windows 10 enthalten. Wenn es fehlt, warnt Sie das Wiederherstellungsskript automatisch. Um es manuell zu installieren, öffnen Sie den Microsoft Store, suchen Sie nach **"App-Installer"** und aktualisieren Sie ihn. Laden Sie alternativ das neueste Paket aus dem offiziellen [GitHub-Repository](https://github.com/microsoft/winget-cli/releases) herunter.
 
-### 2. Apps werden beim Offline-Download übersprungen
-**Symptom**: Das PAS-Protokoll warnt vor übersprungenen Downloads, und einige Apps befinden sich nicht im Offline-Ordner.
-- **Erklärung**: Dies ist ein normales Verhalten aufgrund von Lizenz- oder Herausgeberbeschränkungen. Das Installationsprogramm kann nicht vorab heruntergeladen werden. Diese Anwendungen werden automatisch in das Online-Fallback-Skript verschoben.
+### Warum werden einige Anwendungen beim Export des Offline-Pakets übersprungen?
+Einige Softwarehersteller (wie Microsoft für Visual Studio Code, Git oder Google für Android Studio) untersagen das direkte Herunterladen ihrer Installationsprogramme über die Winget-API. Wenn dies geschieht, überspringt PAS das Herunterladen und fügt sie zu `RestoreOnlineFallback.bat` hinzu. Führen Sie zur Wiederherstellung zuerst `install_all.bat` aus, stellen Sie eine Internetverbindung her und führen Sie dann `RestoreOnlineFallback.bat` aus.
 
-### 3. Berechtigungsfehler
-**Symptom**: Skripte lassen sich nicht ausführen oder brechen mit Fehlern ab.
-- **Lösung**: Stellen Sie sicher, dass Sie die Skripte **als Administrator ausführen**. Viele Desktop-Anwendungen erfordern Administratorrechte, um in `C:\Program Files` zu schreiben und Systemdienste zu registrieren.
+### Warum schlägt das Wiederherstellungsskript fehl oder bittet um Erlaubnis?
+Die meisten Standard-Windows-Anwendungen schreiben Dateien in `C:\Program Files` und registrieren Systemdienste, was lokale Administratorrechte erfordert. Stellen Sie sicher, dass Sie mit der rechten Maustaste auf das Skript klicken und **"Als Administrator ausführen"** wählen.
 
-### 4. Protokollierung und Diagnose
-Wenn die Anwendung abstürzt oder ein Vorgang fehlschlägt, finden Sie die Protokolle hier:
-- **Speicherort**: `%LocalAppData%\PAS\PAS.log` (in die Adressleiste des Windows-Explorers einfügen).
-- **Eigenschaften**:
-  - Wird automatisch rotiert, wenn die Größe **5 MB** überschreitet.
-  - Enthält vollständige Details zu Ausnahmen und Ausgaben der Winget-CLI zur schnellen Fehlerdiagnose.
+### Wo kann ich Protokolldateien einsehen, wenn ein Export fehlschlägt?
+Portable App Sync protokolliert alle Hintergrundoperationen in einer Textdatei. Sie können sie öffnen, indem Sie `%LocalAppData%\PAS\PAS.log` in die Adressleiste des Windows-Explorers einfügen. Die Datei wird automatisch rotiert, wenn sie 5 MB überschreitet.
